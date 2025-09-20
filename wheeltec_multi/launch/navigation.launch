@@ -1,0 +1,17 @@
+
+<launch>
+
+	 <!-- 开启导航-->
+	 <include file="$(find turn_on_wheeltec_robot)/launch/navigation.launch" />
+
+	 <!-- 分享主车位置与速度信息给其他车辆-->
+  	<node pkg="wheeltec_multi" type="send_tfodom.py" name="send_tfodom" output="screen" >
+  	</node>
+
+  	<!-- 记录位置-->
+  	<node pkg="wheeltec_multi" type="log_pose.py" name="leader_pose_logger" output="screen">
+        <param name="robot_frame" value="base_link" />
+        <param name="filename" value="leader_pose.csv" />
+    </node>
+
+</launch>
